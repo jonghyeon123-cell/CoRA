@@ -39,6 +39,7 @@ VECTOR_DB_DIR = "cora_vectordb"
 COURSES_FILE = "cora_data/courses.json"
 SYLLABI_FILE = "cora_data/syllabi.json"
 SUMMARIES_FILE = "cora_data/course_summaries.json"
+ROADMAP_FILE = "roadmap.json"
 
 MAX_COURSES = 50       # 검색 결과 최대 개수
 MAX_HISTORY_TURNS = 10 # 대화 히스토리 유지 턴 수
@@ -58,6 +59,14 @@ if os.path.exists(SUMMARIES_FILE):
     print(f"📋 요약본 로드: {len(SUMMARIES)}개")
 else:
     print("⚠️ course_summaries.json 없음. summarize_courses.py를 먼저 실행하세요.")
+
+ROADMAP = {}
+if os.path.exists(ROADMAP_FILE):
+    with open(ROADMAP_FILE, "r", encoding="utf-8") as f:
+        ROADMAP = json.load(f)
+    print(f"🧭 진로 로드맵 로드: {len(ROADMAP)}개 학과")
+else:
+    print("⚠️ roadmap.json 없음. 진로 트랙 상담은 제한됩니다.")
 
 FILE_TEXTS = {}
 if os.path.exists("cora_data/file_texts.json"):
@@ -88,9 +97,9 @@ SYSTEM_PROMPT = """당신은 고려대학교 수강신청 도우미 CoRA(Course 
 - 시간표 구성, 학점 계산 등에 도움을 줍니다.
 
 규칙:
-- <검색결과> 안에 있는 과목 데이터만 근거로 답변하세요.
+- <검색결과> 안에 있는 과목 데이터와 진로 트랙 로드맵 데이터만 근거로 답변하세요.
 - 데이터에 없는 내용은 "해당 정보는 검색되지 않았습니다"라고 솔직히 말하세요.
-- 과목 언급 시 반드시 [학수번호-분반] 형태로 표기하세요.
+- 분반 정보가 있는 과목은 [학수번호-분반] 형태로 표기하고, 로드맵에만 있는 과목은 과목명(학수번호) 형태로 표기하세요.
 - 답변은 친근하고 간결하게 해주세요.
 - 과목 추천 시 학수번호, 담당교수, 학점, 이수구분을 함께 알려주세요.
 - 검색결과에 평가방식이 있으면 반드시 포함해서 답변하세요.
@@ -100,6 +109,7 @@ SYSTEM_PROMPT = """당신은 고려대학교 수강신청 도우미 CoRA(Course 
 - 사용자가 특정 과목 이수 후 다음 과목을 물어보면, 검색결과에서 연관성 있는 과목을 추천하고 그 이유를 설명하세요.
 - 사용자가 "추천해줘", "관련 과목", "듣기 좋은 과목"처럼 물으면 검색된 과목 중 적절한 과목을 추천하세요.
 - 정확한 과목명이 아니어도 주제 키워드와 관련된 과목을 찾아 추천하세요.
+- 진로 트랙 질문이면 로드맵의 학년별 과목 순서를 기준으로 먼저 설명하고, 검색된 과목 상세 정보가 있으면 함께 보강하세요.
 """
 
 
@@ -322,15 +332,24 @@ def rewrite_query(query):
     return response.content[0].text.strip()    
 STOPWORDS = {
     "관련", "과목", "추천", "추천해줘", "알려줘", "수업",
-    "강의", "듣고", "싶어", "다음", "학기", "좋은"
+    "강의", "듣고", "싶어", "다음", "학기", "좋은",
+    "관련된", "추천해", "알려", "해줘", "뭐", "무엇",
+    "어떤", "들으면", "들어야", "가려면", "위해", "필요"
 }
 
 QUERY_ALIASES = {
     "미적분": ["미적분", "미분적분", "Calculus", "calculus", "수학"],
+    "수학": ["수학", "미적분", "미분적분", "선형대수", "확률", "통계"],
+    "통계": ["통계", "확률", "확률과통계", "데이터분석"],
+    "AI": ["AI", "인공지능", "기계학습", "딥러닝", "머신러닝"],
     "인공지능": ["AI", "인공지능", "기계학습", "딥러닝", "머신러닝"],
+    "머신러닝": ["머신러닝", "기계학습", "딥러닝", "인공지능"],
     "보안": ["보안", "정보보호", "암호", "시스템보안"],
     "백엔드": ["백엔드", "시스템", "운영체제", "데이터베이스", "네트워크"],
-    "데이터": ["데이터", "빅데이터", "데이터베이스", "데이터마이닝"]
+    "데이터": ["데이터", "빅데이터", "데이터베이스", "데이터마이닝"],
+    "프론트엔드": ["프론트엔드", "웹", "HTML", "CSS", "JavaScript", "React"],
+    "하드웨어": ["하드웨어", "컴퓨터구조", "논리회로", "임베디드"],
+    "클라우드": ["클라우드", "네트워크", "분산시스템", "운영체제"]
 }
 
 def extract_subject_terms(query):
@@ -382,6 +401,105 @@ def partial_course_search(query, limit=20):
 
     results.sort(key=lambda item: item[0], reverse=True)
     return [course for _, course in results[:limit]]
+
+
+ROADMAP_QUERY_KEYWORDS = {
+    "트랙", "진로", "로드맵", "커리큘럼", "전공", "학년별",
+    "AI", "인공지능", "머신러닝", "딥러닝", "보안", "데이터",
+    "백엔드", "시스템", "하드웨어", "클라우드", "네트워크",
+    "임베디드", "창업", "소프트웨어"
+}
+
+TRACK_KEYWORD_GROUPS = {
+    "AI": ["AI", "인공지능", "머신러닝", "기계학습", "딥러닝"],
+    "보안": ["보안", "정보보호", "암호"],
+    "데이터": ["데이터", "빅데이터", "데이터사이언스", "통계"],
+    "시스템": ["시스템", "백엔드", "운영체제", "네트워크", "클라우드"],
+    "하드웨어": ["하드웨어", "임베디드", "컴퓨터구조", "논리회로"],
+    "소프트웨어": ["소프트웨어", "개발", "창업", "프론트엔드", "웹"]
+}
+
+
+def combine_contexts(*parts):
+    return "\n\n".join(part.strip() for part in parts if part and part.strip())
+
+
+def is_roadmap_query(query):
+    return any(keyword.lower() in query.lower() for keyword in ROADMAP_QUERY_KEYWORDS)
+
+
+def pick_department_for_roadmap(query):
+    for department in ROADMAP:
+        if department and department in query:
+            return department
+    if "컴퓨터학과" in ROADMAP:
+        return "컴퓨터학과"
+    return next(iter(ROADMAP), None)
+
+
+def pick_tracks_for_roadmap(query, tracks, limit=2):
+    if not tracks:
+        return []
+
+    query_lower = query.lower()
+    selected = []
+
+    for track_name in tracks:
+        if track_name.lower() in query_lower:
+            selected.append(track_name)
+
+    for group_keywords in TRACK_KEYWORD_GROUPS.values():
+        if not any(keyword.lower() in query_lower for keyword in group_keywords):
+            continue
+        for track_name in tracks:
+            if track_name in selected:
+                continue
+            if any(keyword.lower() in track_name.lower() for keyword in group_keywords):
+                selected.append(track_name)
+
+    if not selected and ("트랙" in query or "진로" in query or "로드맵" in query):
+        selected = list(tracks.keys())[:limit]
+
+    return selected[:limit]
+
+
+def format_roadmap_course(course):
+    if isinstance(course, dict):
+        course_id = course.get("id") or course.get("courseId") or ""
+        course_name = course.get("name") or course.get("courseName") or course_id
+        return f"{course_name}({course_id})" if course_id else course_name
+    return str(course)
+
+
+def build_roadmap_context(query):
+    if not ROADMAP or not is_roadmap_query(query):
+        return ""
+
+    department = pick_department_for_roadmap(query)
+    if not department:
+        return ""
+
+    department_data = ROADMAP.get(department, {})
+    tracks = department_data.get("tracks", {})
+    selected_tracks = pick_tracks_for_roadmap(query, tracks)
+    if not selected_tracks:
+        return ""
+
+    context = f"[진로 트랙 로드맵 검색 결과]\n학과: {department}\n"
+
+    for track_name in selected_tracks:
+        track = tracks.get(track_name, {})
+        context += f"\n트랙: {track_name}\n"
+        if track.get("description"):
+            context += f"설명: {track['description']}\n"
+        for stage in track.get("stages", []):
+            label = stage.get("label", "")
+            year = stage.get("year", "")
+            context += f"\n- {label} ({year})\n"
+            for course in stage.get("courses", []):
+                context += f"  · {format_roadmap_course(course)}\n"
+
+    return context
 
 
 
@@ -448,6 +566,8 @@ def prefix_course_lookup(course_codes: list) -> list:
 
 def hybrid_search(query):
     """키워드 + 벡터 검색 결합 (direct lookup 우선)"""
+    original_query = query
+    roadmap_context = build_roadmap_context(original_query)
 
     # ── 1. direct lookup: 학수번호가 명시된 경우 즉시 조회 ──────────────
     direct_codes = extract_course_codes_from_query(query)
@@ -470,14 +590,20 @@ def hybrid_search(query):
             for i, course in enumerate(capped):
                 context += f"\n--- 과목 {i+1} ---\n"
                 context += format_course(course, show_weekly=show_weekly_d)
-            return context
+            return combine_contexts(roadmap_context, context)
         else:
             print(f"[DEBUG][hybrid] direct_results empty after prefix fallback → fall through to hybrid")
     else:
         print(f"[DEBUG][hybrid] no course codes in query → hybrid search")
 
     # ── 2. 기존 hybrid 검색 (direct hit 없을 때) ────────────────────────
-    query = rewrite_query(query)
+    try:
+        query = rewrite_query(query)
+    except Exception as e:
+        print(f"[WARN] 후속 질문 재작성 실패: {e}")
+        query = original_query
+
+    search_text = f"{original_query} {query}"
     keywords = extract_keywords(query)
     has_keywords = any([
         keywords["prof_nm"],
@@ -493,7 +619,7 @@ def hybrid_search(query):
     #print(f"DEBUG has_keywords: {has_keywords}")
 
     context = ""
-    show_weekly = any(kw in query for kw in ["주차", "커리큘럼", "강의계획", "수업계획", "weekly","주차별","계획","시간표","어떤 내용","내용","수업 내용","강의 계획","수업 계획","스케쥴","schedule","뭘 배워","무엇을 배워","무엇을 배워?","뭘 배워?","어떻게 진행","어떤식으로 진행 돼?","학습계획","학습 계획","주차별 학습계획"])
+    show_weekly = any(kw in search_text for kw in ["주차", "커리큘럼", "강의계획", "수업계획", "weekly","주차별","계획","시간표","어떤 내용","내용","수업 내용","강의 계획","수업 계획","스케쥴","schedule","뭘 배워","무엇을 배워","무엇을 배워?","뭘 배워?","어떻게 진행","어떤식으로 진행 돼?","학습계획","학습 계획","주차별 학습계획"])
   
   
     # 키워드 검색 (한 번만 호출)
@@ -507,13 +633,13 @@ def hybrid_search(query):
             context += f"\n--- 과목 {i+1} ---\n"
             context += format_course(course, show_weekly = show_weekly)
           
-    partial_results = partial_course_search(query)
+    partial_results = partial_course_search(search_text)
 
     if partial_results:
-      context += f"\n[부분 키워드 검색 결과: {len(partial_results)}개]\n"
-      for i, course in enumerate(partial_results[:MAX_COURSES]):
-          context += f"\n— 과목 {i+1} —\n"
-          context += format_course(course, show_weekly=show_weekly)
+        context += f"\n[부분 키워드 검색 결과: {len(partial_results)}개]\n"
+        for i, course in enumerate(partial_results[:MAX_COURSES]):
+            context += f"\n--- 과목 {i+1} ---\n"
+            context += format_course(course, show_weekly=show_weekly)
 
 
     # 키워드 없거나 결과 부족하면 벡터 검색 보완
@@ -552,7 +678,7 @@ def hybrid_search(query):
                     f"학점: {meta.get('credit', '')}\n"
                 )
 
-    return context
+    return combine_contexts(roadmap_context, context)
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
