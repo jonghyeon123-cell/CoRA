@@ -320,7 +320,7 @@ def rewrite_query(query):
         }]
     )
     return response.content[0].text.strip()    
-  STOPWORDS = {
+STOPWORDS = {
     "관련", "과목", "추천", "추천해줘", "알려줘", "수업",
     "강의", "듣고", "싶어", "다음", "학기", "좋은"
 }
