@@ -1,0 +1,10 @@
+node_modules
+.git
+.DS_Store
+npm-debug.log
+*.log
+.data
+.env
+.env.*
+*.Zone.Identifier
+*:Zone.Identifier

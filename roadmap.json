@@ -1,0 +1,1304 @@
+{
+  "컴퓨터학과": {
+    "tracks": {
+      "AI/머신러닝": {
+        "description": "인공지능, 머신러닝, 딥러닝 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 프로그래밍 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "COSE111",
+              "COSE112"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 핵심 전공 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "COSE214",
+              "COSE211",
+              "COSE222"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: AI 기반",
+            "year": "3학년",
+            "courses": [
+              "COSE361",
+              "COSE362",
+              "COSE341",
+              "COSE371"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: AI 심화",
+            "year": "4학년",
+            "courses": [
+              "COSE474",
+              "COSE475",
+              "COSE461",
+              "COSE471",
+              "DATA303",
+              "DATA403"
+            ]
+          }
+        ]
+      },
+      "시스템/백엔드": {
+        "description": "운영체제, 네트워크, 시스템 프로그래밍 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 프로그래밍 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "COSE111",
+              "COSE112"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 핵심 전공 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "COSE214",
+              "COSE222",
+              "COSE221"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 시스템",
+            "year": "3학년",
+            "courses": [
+              "COSE341",
+              "COSE342",
+              "COSE322",
+              "COSE312"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화/응용",
+            "year": "4학년",
+            "courses": [
+              "COSE444",
+              "COSE421",
+              "COSE415",
+              "COSE441",
+              "COSE321"
+            ]
+          }
+        ]
+      },
+      "보안": {
+        "description": "정보보호, 소프트웨어 보안 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 프로그래밍 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "COSE111",
+              "COSE112"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 핵심 전공 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "COSE214",
+              "COSE222",
+              "COSE221"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 보안 기반",
+            "year": "3학년",
+            "courses": [
+              "COSE341",
+              "COSE342",
+              "COSE354",
+              "COSE371"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 보안 심화",
+            "year": "4학년",
+            "courses": [
+              "COSE451",
+              "COSE484",
+              "COSE425",
+              "COSE419"
+            ]
+          }
+        ]
+      },
+      "데이터사이언스": {
+        "description": "데이터 분석, 빅데이터 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 프로그래밍 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "COSE111",
+              "COSE112"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 핵심 전공 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "COSE214",
+              "COSE382",
+              "COSE371"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 데이터 기반",
+            "year": "3학년",
+            "courses": [
+              "COSE361",
+              "COSE362",
+              "COSE471",
+              "DATA301"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 데이터 심화",
+            "year": "4학년",
+            "courses": [
+              "DATA304",
+              "DATA302",
+              "DATA303",
+              "STAT302",
+              "STAT404",
+              "DATA401"
+            ]
+          }
+        ]
+      },
+      "소프트웨어개발/창업": {
+        "description": "소프트웨어 개발, 창업을 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 프로그래밍 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "COSE111",
+              "COSE112"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 핵심 전공 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "COSE214",
+              "COSE212",
+              "COSE211"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 개발 기반",
+            "year": "3학년",
+            "courses": [
+              "COSE341",
+              "COSE352",
+              "COSE371",
+              "COSE392"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 프로젝트/창업",
+            "year": "4학년",
+            "courses": [
+              "COSE480",
+              "COSE457",
+              "COSE455",
+              "COSE389",
+              "COSE432"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "인공지능학과": {
+    "tracks": {
+      "AI 연구/개발": {
+        "description": "AI 핵심 연구 및 개발을 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "COSE111",
+              "COSE112"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: AI 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "COSE214",
+              "CSAI201",
+              "CSAI202",
+              "COSE382"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: AI 응용",
+            "year": "3학년",
+            "courses": [
+              "COSE361",
+              "COSE362",
+              "COSE474",
+              "CSAI302",
+              "CSAI303"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: AI 심화",
+            "year": "4학년",
+            "courses": [
+              "COSE475",
+              "CSAI310",
+              "CSAI405",
+              "CSAI410",
+              "CSAI409",
+              "COSE480"
+            ]
+          }
+        ]
+      },
+      "컴퓨터비전": {
+        "description": "이미지, 영상 인식 AI를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "COSE111",
+              "COSE112"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: AI/수학 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "CSAI201",
+              "CSAI202",
+              "COSE382"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 비전 기반",
+            "year": "3학년",
+            "courses": [
+              "COSE474",
+              "DATA302",
+              "CSAI304",
+              "CSAI303"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 비전 심화",
+            "year": "4학년",
+            "courses": [
+              "CSAI308",
+              "COSE475",
+              "CSAI407",
+              "DATA303"
+            ]
+          }
+        ]
+      },
+      "자연어처리": {
+        "description": "텍스트, 언어 AI를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "COSE111",
+              "COSE112"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: AI 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "CSAI201",
+              "CSAI202",
+              "COSE382"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: NLP 기반",
+            "year": "3학년",
+            "courses": [
+              "COSE474",
+              "COSE461",
+              "CSAI303",
+              "DATA303"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: NLP 심화",
+            "year": "4학년",
+            "courses": [
+              "CSAI410",
+              "CSAI405",
+              "CSAI306",
+              "CSAI404",
+              "COSE475"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "데이터과학과": {
+    "tracks": {
+      "데이터분석": {
+        "description": "데이터 분석 및 통계 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "STAT170",
+              "MATH161"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 데이터/통계 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "STAT221",
+              "STAT232",
+              "MATH221",
+              "DATA202"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 분석 응용",
+            "year": "3학년",
+            "courses": [
+              "COSE362",
+              "STAT342",
+              "STAT302",
+              "DATA301",
+              "DATA303"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "DATA304",
+              "STAT401",
+              "STAT424",
+              "DATA401",
+              "DATA421"
+            ]
+          }
+        ]
+      },
+      "머신러닝/AI": {
+        "description": "머신러닝, AI 응용을 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 기초",
+            "year": "1학년",
+            "courses": [
+              "COSE101",
+              "COSE102",
+              "STAT170",
+              "MATH161"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: ML 기초",
+            "year": "2학년",
+            "courses": [
+              "COSE213",
+              "COSE214",
+              "STAT221",
+              "MATH221"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: ML 응용",
+            "year": "3학년",
+            "courses": [
+              "COSE361",
+              "COSE362",
+              "COSE474",
+              "DATA301",
+              "COSE423"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "DATA303",
+              "DATA403",
+              "COSE475",
+              "STAT424",
+              "DATA422"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "경제학과": {
+    "tracks": {
+      "일반경제학": {
+        "description": "경제학 전반을 학습하는 기본 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 경제학 입문",
+            "year": "1~2학년",
+            "courses": [
+              "ECON171",
+              "ECON172",
+              "ECON173",
+              "ECON174"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 경제이론 기초",
+            "year": "2~3학년",
+            "courses": [
+              "ECON201",
+              "ECON202",
+              "ECON301"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 응용경제",
+            "year": "3학년",
+            "courses": [
+              "ECON331",
+              "ECON333",
+              "ECON335",
+              "ECON336",
+              "ECON354"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화/세미나",
+            "year": "4학년",
+            "courses": [
+              "ECON439",
+              "ECON463",
+              "ECON460",
+              "ECON434"
+            ]
+          }
+        ]
+      },
+      "금융/재무": {
+        "description": "금융, 재무 분야를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 경제학 입문",
+            "year": "1~2학년",
+            "courses": [
+              "ECON171",
+              "ECON172",
+              "ECON174"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 이론 기초",
+            "year": "2~3학년",
+            "courses": [
+              "ECON201",
+              "ECON202",
+              "ECON354"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 금융 응용",
+            "year": "3학년",
+            "courses": [
+              "ECON331",
+              "ECON335",
+              "ECON301"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 금융 심화",
+            "year": "4학년",
+            "courses": [
+              "ECON465",
+              "ECON359",
+              "ECON463"
+            ]
+          }
+        ]
+      },
+      "데이터/계량경제": {
+        "description": "계량경제학, 데이터 분석을 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 경제학 입문",
+            "year": "1~2학년",
+            "courses": [
+              "ECON171",
+              "ECON172",
+              "ECON174",
+              "ECON173"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 이론 기초",
+            "year": "2~3학년",
+            "courses": [
+              "ECON201",
+              "ECON202",
+              "ECON301"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 계량 응용",
+            "year": "3학년",
+            "courses": [
+              "ECON380",
+              "ECON324",
+              "ECON240"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "ECON463",
+              "ECON452",
+              "ECON460"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "경영학과": {
+    "tracks": {
+      "비즈니스애널리틱스": {
+        "description": "데이터 기반 경영 분석 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 경영 기초",
+            "year": "1~2학년",
+            "courses": [
+              "BUSS154",
+              "BUSS164",
+              "ECON171",
+              "ECON172"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 전공 필수",
+            "year": "2학년",
+            "courses": [
+              "BUSS207",
+              "BUSS213",
+              "BUSS216",
+              "BUSS217"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 분석 응용",
+            "year": "3학년",
+            "courses": [
+              "BUSS246",
+              "BUSS256",
+              "BUSS305",
+              "BUSS316",
+              "BUSS395"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "BUSS302",
+              "BUSS317",
+              "BUSS453",
+              "BUSS312"
+            ]
+          }
+        ]
+      },
+      "재무/투자": {
+        "description": "재무 분석, 투자 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 경영 기초",
+            "year": "1~2학년",
+            "courses": [
+              "BUSS154",
+              "BUSS164",
+              "ECON171",
+              "ECON172"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 전공 필수",
+            "year": "2학년",
+            "courses": [
+              "BUSS207",
+              "BUSS213"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 재무 응용",
+            "year": "3학년",
+            "courses": [
+              "BUSS254",
+              "BUSS384",
+              "BUSS386"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "BUSS416",
+              "BUSS414",
+              "BUSS413",
+              "BUSS418"
+            ]
+          }
+        ]
+      },
+      "AI와경영": {
+        "description": "AI 기반 경영 의사결정을 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 경영 기초",
+            "year": "1~2학년",
+            "courses": [
+              "BUSS154",
+              "BUSS164",
+              "BUSS203",
+              "BUSS221"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: AI 경영 기초",
+            "year": "2학년",
+            "courses": [
+              "BUSS216",
+              "BUSS217",
+              "BUSS220",
+              "BUSS305"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: AI 응용",
+            "year": "3학년",
+            "courses": [
+              "BUSS310",
+              "BUSS308",
+              "BUSS306",
+              "BUSS385"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "BUSS426",
+              "BUSS413",
+              "BUSS356"
+            ]
+          }
+        ]
+      },
+      "기업가정신/창업": {
+        "description": "창업, 스타트업을 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 경영 기초",
+            "year": "1~2학년",
+            "courses": [
+              "BUSS154",
+              "BUSS164",
+              "BUSS165"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 창업 기초",
+            "year": "2학년",
+            "courses": [
+              "BUSS259",
+              "BUSS303",
+              "BUSS335"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 창업 전략",
+            "year": "3학년",
+            "courses": [
+              "BUSS356",
+              "BUSS394",
+              "BUSS397",
+              "BUSS407"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 창업 심화",
+            "year": "4학년",
+            "courses": [
+              "BUSS409",
+              "BUSS410",
+              "BUSS454",
+              "BUSS484"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "간호학과": {
+    "tracks": {
+      "임상간호": {
+        "description": "병원 임상 현장의 전문 간호사를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 간호 입문",
+            "year": "1학년",
+            "courses": [
+              "NRSG217",
+              "NRSG240",
+              "NRSG241",
+              "NRSG250",
+              "NRSG251"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 기본간호",
+            "year": "2학년",
+            "courses": [
+              "NRSG261",
+              "NRSG262",
+              "NRSG265",
+              "NRSG266",
+              "NRSG271",
+              "NRSG273",
+              "NRSG243",
+              "NRSG244"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 성인간호",
+            "year": "3학년",
+            "courses": [
+              "NRSG272",
+              "NRSG274",
+              "NRSG275",
+              "NRSG277",
+              "NRSG285",
+              "NRSG286",
+              "NRSG341",
+              "NRSG342"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화/통합실습",
+            "year": "4학년",
+            "courses": [
+              "NRSG280",
+              "NRSG287",
+              "NRSG288",
+              "NRSG425",
+              "NRSG481",
+              "NRSG490",
+              "NRSG420"
+            ]
+          }
+        ]
+      },
+      "지역사회/공중보건": {
+        "description": "지역사회 보건, 공중보건 분야를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 간호 입문",
+            "year": "1학년",
+            "courses": [
+              "NRSG217",
+              "NRSG240",
+              "NRSG241",
+              "NRSG254"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 기본간호",
+            "year": "2학년",
+            "courses": [
+              "NRSG261",
+              "NRSG262",
+              "NRSG253",
+              "NRSG234",
+              "NRSG236"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 지역사회간호",
+            "year": "3학년",
+            "courses": [
+              "NRSG464",
+              "NRSG461",
+              "NRSG380",
+              "NRSG317"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 실습/심화",
+            "year": "4학년",
+            "courses": [
+              "NRSG471",
+              "NRSG472",
+              "NRSG390",
+              "NRSG430",
+              "NRSG420"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "전기전자공학부": {
+    "tracks": {
+      "반도체/소자": {
+        "description": "반도체 설계, 소자 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 전공 기초",
+            "year": "2학년",
+            "courses": [
+              "KECE211",
+              "KECE205",
+              "KECE207",
+              "KECE231"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 핵심 전공",
+            "year": "2~3학년",
+            "courses": [
+              "KECE301",
+              "KECE303",
+              "KECE313",
+              "KECE323"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 반도체 기반",
+            "year": "3학년",
+            "courses": [
+              "KECE331",
+              "KECE343",
+              "KECE411",
+              "KECE415"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "KECE461",
+              "KECE463",
+              "KECE493",
+              "KECE403"
+            ]
+          }
+        ]
+      },
+      "통신/신호처리": {
+        "description": "무선통신, 신호처리 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 전공 기초",
+            "year": "2학년",
+            "courses": [
+              "KECE211",
+              "KECE205",
+              "KECE207",
+              "KECE231"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 핵심 전공",
+            "year": "2~3학년",
+            "courses": [
+              "KECE301",
+              "KECE313",
+              "KECE209",
+              "KECE323"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 통신 기반",
+            "year": "3학년",
+            "courses": [
+              "KECE421",
+              "KECE423",
+              "KECE425"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "KECE499",
+              "KECE403",
+              "KECE411"
+            ]
+          }
+        ]
+      },
+      "AI/지능시스템": {
+        "description": "AI, 지능 시스템 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 전공 기초",
+            "year": "2학년",
+            "courses": [
+              "KECE211",
+              "KECE205",
+              "KECE207",
+              "KECE231"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 핵심 전공",
+            "year": "2~3학년",
+            "courses": [
+              "KECE301",
+              "KECE313",
+              "KECE343",
+              "KECE209"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: AI 기반",
+            "year": "3학년",
+            "courses": [
+              "KECE345",
+              "KECE445",
+              "KECE447"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "KECE471",
+              "KECE499",
+              "KECE483",
+              "KECE403"
+            ]
+          }
+        ]
+      },
+      "전력/에너지": {
+        "description": "전력시스템, 에너지 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 전공 기초",
+            "year": "2학년",
+            "courses": [
+              "KECE211",
+              "KECE205",
+              "KECE231"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 핵심 전공",
+            "year": "2~3학년",
+            "courses": [
+              "KECE301",
+              "KECE313",
+              "KECE323"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 전력 기반",
+            "year": "3학년",
+            "courses": [
+              "KECE359",
+              "KECE411"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "KECE419",
+              "KECE495",
+              "KECE403"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "교육학과": {
+    "tracks": {
+      "교육심리/상담": {
+        "description": "교육심리, 학교상담 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 교육학 입문",
+            "year": "1학년",
+            "courses": [
+              "EDUC161",
+              "EDUC163"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 심리 기초",
+            "year": "2학년",
+            "courses": [
+              "EDUC221",
+              "EDUC321",
+              "EDUC251"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 심리 응용",
+            "year": "3학년",
+            "courses": [
+              "EDUC363",
+              "EDUC365",
+              "EDUC271",
+              "EDUC303"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "EDUC490",
+              "EDUC308",
+              "EDUC310"
+            ]
+          }
+        ]
+      },
+      "교육행정/정책": {
+        "description": "교육행정, 교육정책 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 교육학 입문",
+            "year": "1학년",
+            "courses": [
+              "EDUC161",
+              "EDUC163"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 교육학 기초",
+            "year": "2학년",
+            "courses": [
+              "EDUC221",
+              "EDUC225",
+              "EDUC251"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 행정/정책",
+            "year": "3학년",
+            "courses": [
+              "EDUC331",
+              "EDUC497",
+              "EDUC265",
+              "EDUC303"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "EDUC308",
+              "EDUC310"
+            ]
+          }
+        ]
+      },
+      "평생교육": {
+        "description": "평생교육, 기업교육 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1,
+            "label": "1단계: 교육학 입문",
+            "year": "1학년",
+            "courses": [
+              "EDUC161",
+              "EDUC163"
+            ]
+          },
+          {
+            "stage": 2,
+            "label": "2단계: 평생교육 기초",
+            "year": "2학년",
+            "courses": [
+              "EDUC241",
+              "EDUC281",
+              "EDUC321"
+            ]
+          },
+          {
+            "stage": 3,
+            "label": "3단계: 평생교육 응용",
+            "year": "3학년",
+            "courses": [
+              "EDUC399",
+              "EDUC230",
+              "EDUC303"
+            ]
+          },
+          {
+            "stage": 4,
+            "label": "4단계: 심화",
+            "year": "4학년",
+            "courses": [
+              "EDUC491",
+              "EDUC490",
+              "EDUC308"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

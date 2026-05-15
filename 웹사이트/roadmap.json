@@ -1,0 +1,592 @@
+{
+  "컴퓨터학과": {
+    "tracks": {
+      "AI/인공지능": {
+        "description": "인공지능, 기계학습, 딥러닝 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: 전공 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE222", "name": "컴퓨터구조"},
+              {"id": "COSE214", "name": "알고리즘"},
+              {"id": "COSE211", "name": "이산수학"},
+              {"id": "COSE382", "name": "확률및랜덤과정"},
+              {"id": "COSE423", "name": "볼록최적화입문"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: AI 핵심", "year": "3학년",
+            "courses": [
+              {"id": "COSE361", "name": "인공지능"},
+              {"id": "COSE362", "name": "기계학습"},
+              {"id": "COSE341", "name": "운영체제"},
+              {"id": "DATA302", "name": "기초컴퓨터비전이론및응용"},
+              {"id": "COSE461", "name": "자연어처리"},
+              {"id": "COSE474", "name": "딥러닝"},
+              {"id": "DATA403", "name": "강화학습"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: AI 심화", "year": "4학년",
+            "courses": [
+              {"id": "DATA303", "name": "고급기계학습"},
+              {"id": "COSE475", "name": "고급딥러닝"},
+              {"id": "COSE416", "name": "인공지능과자율주행자동차"},
+              {"id": "COSE471", "name": "데이터과학"},
+              {"id": "COSE480", "name": "산학캡스톤디자인"}
+            ]
+          }
+        ]
+      },
+      "Blockchain/보안": {
+        "description": "정보보호, 블록체인, 소프트웨어 보안 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: 전공 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE222", "name": "컴퓨터구조"},
+              {"id": "COSE214", "name": "알고리즘"},
+              {"id": "COSE221", "name": "논리설계"},
+              {"id": "COSE211", "name": "이산수학"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 보안 기반", "year": "3학년",
+            "courses": [
+              {"id": "COSE341", "name": "운영체제"},
+              {"id": "COSE342", "name": "컴퓨터네트워크"},
+              {"id": "COSE354", "name": "정보보호"},
+              {"id": "COSE371", "name": "데이터베이스"},
+              {"id": "COSE419", "name": "소프트웨어검증"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: 보안 심화", "year": "4학년",
+            "courses": [
+              {"id": "COSE451", "name": "소프트웨어보안"},
+              {"id": "COSE425", "name": "블록체인입문및실습"},
+              {"id": "COSE484", "name": "무선보안"},
+              {"id": "COSE480", "name": "산학캡스톤디자인"}
+            ]
+          }
+        ]
+      },
+      "Cloud/IoT/시스템": {
+        "description": "클라우드, 운영체제, 네트워크, IoT 시스템 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: 전공 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE222", "name": "컴퓨터구조"},
+              {"id": "COSE214", "name": "알고리즘"},
+              {"id": "COSE221", "name": "논리설계"},
+              {"id": "COSE283", "name": "회로이론"},
+              {"id": "COSE385", "name": "신호및시스템"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 시스템 기반", "year": "3학년",
+            "courses": [
+              {"id": "COSE341", "name": "운영체제"},
+              {"id": "COSE342", "name": "컴퓨터네트워크"},
+              {"id": "COSE312", "name": "컴파일러"},
+              {"id": "COSE321", "name": "컴퓨터시스템설계"},
+              {"id": "COSE322", "name": "시스템프로그래밍"},
+              {"id": "COSE395", "name": "사물인터넷설계"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: 클라우드/IoT 심화", "year": "4학년",
+            "courses": [
+              {"id": "COSE444", "name": "클라우드컴퓨팅"},
+              {"id": "COSE441", "name": "인터넷프로토콜"},
+              {"id": "COSE421", "name": "임베디드시스템"},
+              {"id": "COSE415", "name": "저전력컴퓨팅"},
+              {"id": "COSE480", "name": "산학캡스톤디자인"}
+            ]
+          }
+        ]
+      },
+      "빅데이터": {
+        "description": "데이터 분석, 빅데이터 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: 전공 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE214", "name": "알고리즘"},
+              {"id": "COSE371", "name": "데이터베이스"},
+              {"id": "COSE331", "name": "컴퓨터그래픽스"},
+              {"id": "COSE382", "name": "확률및랜덤과정"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 데이터 기반", "year": "3학년",
+            "courses": [
+              {"id": "COSE362", "name": "기계학습"},
+              {"id": "COSE372", "name": "데이터베이스시스템"},
+              {"id": "COSE471", "name": "데이터과학"},
+              {"id": "DATA301", "name": "데이터실험설계및분석"},
+              {"id": "DATA304", "name": "빅데이터분석"},
+              {"id": "COSE436", "name": "인터렉티브시각화"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: 빅데이터 심화", "year": "4학년",
+            "courses": [
+              {"id": "DATA303", "name": "고급기계학습"},
+              {"id": "DATA401", "name": "데이터시각화"},
+              {"id": "STAT302", "name": "시계열분석"},
+              {"id": "STAT404", "name": "베이즈통계입문"},
+              {"id": "COSE432", "name": "인간컴퓨터상호작용입문"},
+              {"id": "COSE480", "name": "산학캡스톤디자인"}
+            ]
+          }
+        ]
+      },
+      "창의/창업/Entrepreneurship": {
+        "description": "소프트웨어 창업, 프로젝트 관리를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: 전공 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE214", "name": "알고리즘"},
+              {"id": "COSE211", "name": "이산수학"},
+              {"id": "COSE389", "name": "기업가정신과리더쉽"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 개발/창업 기반", "year": "3학년",
+            "courses": [
+              {"id": "COSE341", "name": "운영체제"},
+              {"id": "COSE352", "name": "소프트웨어공학"},
+              {"id": "COSE371", "name": "데이터베이스"},
+              {"id": "COSE392", "name": "창의적소프트웨어창업방법론"},
+              {"id": "COSE455", "name": "스타트업프로젝트관리"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: 프로젝트/창업 심화", "year": "4학년",
+            "courses": [
+              {"id": "COSE457", "name": "실전SW프로젝트"},
+              {"id": "COSE480", "name": "산학캡스톤디자인"},
+              {"id": "COSE405", "name": "컴퓨터학콜로키움"},
+              {"id": "COSE407", "name": "개별연구프로젝트"}
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "인공지능학과": {
+    "tracks": {
+      "소프트웨어/보안": {
+        "description": "AI 시스템 소프트웨어 및 보안 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: 전공 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE221", "name": "논리설계"},
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE222", "name": "컴퓨터구조"},
+              {"id": "COSE214", "name": "알고리즘"},
+              {"id": "COSE211", "name": "이산수학"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 시스템/보안 기반", "year": "3학년",
+            "courses": [
+              {"id": "COSE341", "name": "운영체제"},
+              {"id": "CSAI302", "name": "GPU구조및프로그래밍"},
+              {"id": "CSAI409", "name": "인공지능시스템"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: AI 보안 심화", "year": "4학년",
+            "courses": [
+              {"id": "CSAI401", "name": "AI보안입문"},
+              {"id": "COSE480", "name": "산학캡스톤디자인"},
+              {"id": "COSE457", "name": "실전SW프로젝트"}
+            ]
+          }
+        ]
+      },
+      "데이터과학/의료인공지능": {
+        "description": "데이터 기반 AI 및 의료 인공지능 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: 전공 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE214", "name": "알고리즘"},
+              {"id": "CSAI201", "name": "기초인공지능"},
+              {"id": "CSAI202", "name": "기초딥러닝"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 데이터/AI 기반", "year": "3학년",
+            "courses": [
+              {"id": "COSE371", "name": "데이터베이스"},
+              {"id": "CSAI303", "name": "데이터인텔리전스"},
+              {"id": "COSE471", "name": "데이터과학"},
+              {"id": "CSAI411", "name": "정보검색"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: 의료AI 심화", "year": "4학년",
+            "courses": [
+              {"id": "CSAI402", "name": "의료인공지능"},
+              {"id": "CSAI431", "name": "인공지능응용I"},
+              {"id": "CSAI432", "name": "인공지능응용II"},
+              {"id": "COSE480", "name": "산학캡스톤디자인"}
+            ]
+          }
+        ]
+      },
+      "이론/응용 AI": {
+        "description": "AI 핵심 이론부터 심화 응용까지 포괄하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"},
+              {"id": "CSAI201", "name": "기초인공지능"},
+              {"id": "COSE423", "name": "볼록최적화입문"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: AI 기초", "year": "2학년",
+            "courses": [
+              {"id": "CSAI202", "name": "기초딥러닝"},
+              {"id": "COSE361", "name": "인공지능"},
+              {"id": "COSE362", "name": "기계학습"},
+              {"id": "COSE382", "name": "확률및랜덤과정"},
+              {"id": "COSE281", "name": "공학수학"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: AI 핵심", "year": "3학년",
+            "courses": [
+              {"id": "COSE474", "name": "딥러닝"},
+              {"id": "DATA302", "name": "기초컴퓨터비전이론및응용"},
+              {"id": "CSAI310", "name": "고급강화학습"},
+              {"id": "DATA303", "name": "고급기계학습"},
+              {"id": "COSE461", "name": "자연어처리"},
+              {"id": "CSAI306", "name": "멀티모달학습"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: AI 심화/응용", "year": "4학년",
+            "courses": [
+              {"id": "COSE475", "name": "고급딥러닝"},
+              {"id": "CSAI308", "name": "3차원컴퓨터비전"},
+              {"id": "CSAI405", "name": "생성형AI"},
+              {"id": "CSAI410", "name": "고급자연어처리"},
+              {"id": "CSAI407", "name": "지능형인지로봇"},
+              {"id": "COSE416", "name": "인공지능과자율주행자동차"},
+              {"id": "CSAI408", "name": "메타러닝"},
+              {"id": "CSAI404", "name": "음성및오디오처리"}
+            ]
+          }
+        ]
+      },
+      "실습/융합": {
+        "description": "AI 실무 프로젝트 및 융합 역량을 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: AI 기초", "year": "2학년",
+            "courses": [
+              {"id": "CSAI201", "name": "기초인공지능"},
+              {"id": "CSAI202", "name": "기초딥러닝"},
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE214", "name": "알고리즘"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 콜로키움/프로젝트", "year": "3학년",
+            "courses": [
+              {"id": "CSAI350", "name": "인공지능콜로키움I"},
+              {"id": "CSAI351", "name": "인공지능콜로키움II"},
+              {"id": "CSAI403", "name": "인터랙티브AI"},
+              {"id": "CSAI406", "name": "AI&HCI"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: 캡스톤/현장실습", "year": "4학년",
+            "courses": [
+              {"id": "COSE480", "name": "산학캡스톤디자인"},
+              {"id": "COSE457", "name": "실전SW프로젝트"},
+              {"id": "COSE401", "name": "현장실습및창업실습I"},
+              {"id": "COSE402", "name": "현장실습및창업실습II"},
+              {"id": "CSAI431", "name": "인공지능응용I"},
+              {"id": "CSAI432", "name": "인공지능응용II"}
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "데이터과학과": {
+    "tracks": {
+      "소프트웨어": {
+        "description": "데이터 처리 소프트웨어 개발 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "STAT204", "name": "통계계산프로그래밍"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "COSE112", "name": "전산수학II"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: SW 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE222", "name": "컴퓨터구조"},
+              {"id": "COSE214", "name": "알고리즘"},
+              {"id": "COSE371", "name": "데이터베이스"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 시스템 기반", "year": "3학년",
+            "courses": [
+              {"id": "COSE341", "name": "운영체제"},
+              {"id": "COSE342", "name": "컴퓨터네트워크"},
+              {"id": "COSE354", "name": "정보보호"},
+              {"id": "DATA202", "name": "계산복잡도기초"},
+              {"id": "COSE444", "name": "클라우드컴퓨팅"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: 응용/프로젝트", "year": "4학년",
+            "courses": [
+              {"id": "COSE432", "name": "인간컴퓨터상호작용입문"},
+              {"id": "DATA402", "name": "데이터보안입문"},
+              {"id": "DATA421", "name": "졸업프로젝트(캡스톤디자인)I"},
+              {"id": "DATA422", "name": "졸업프로젝트(캡스톤디자인)II"}
+            ]
+          }
+        ]
+      },
+      "인공지능": {
+        "description": "데이터 기반 AI 및 머신러닝 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "COSE111", "name": "전산수학I"},
+              {"id": "STAT170", "name": "기초통계학"},
+              {"id": "MATH161", "name": "미적분학및연습I"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: AI/수학 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE214", "name": "알고리즘"},
+              {"id": "MATH221", "name": "선형대수I및연습"},
+              {"id": "COSE423", "name": "볼록최적화입문"},
+              {"id": "COSE382", "name": "확률및랜덤과정"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: AI 기반", "year": "3학년",
+            "courses": [
+              {"id": "COSE361", "name": "인공지능"},
+              {"id": "COSE362", "name": "기계학습"},
+              {"id": "COSE474", "name": "딥러닝"},
+              {"id": "DATA302", "name": "기초컴퓨터비전이론및응용"},
+              {"id": "DATA301", "name": "데이터실험설계및분석"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: AI 심화", "year": "4학년",
+            "courses": [
+              {"id": "DATA303", "name": "고급기계학습"},
+              {"id": "COSE475", "name": "고급딥러닝"},
+              {"id": "DATA403", "name": "강화학습"},
+              {"id": "STAT424", "name": "통계적머신러닝"},
+              {"id": "DATA421", "name": "졸업프로젝트(캡스톤디자인)I"}
+            ]
+          }
+        ]
+      },
+      "빅데이터/통계/수학": {
+        "description": "통계, 수학 기반 빅데이터 분석 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "STAT204", "name": "통계계산프로그래밍"},
+              {"id": "STAT170", "name": "기초통계학"},
+              {"id": "MATH161", "name": "미적분학및연습I"},
+              {"id": "STAT241", "name": "행렬이론"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: 통계/수학 기초", "year": "2학년",
+            "courses": [
+              {"id": "MATH221", "name": "선형대수I및연습"},
+              {"id": "STAT221", "name": "확률론입문"},
+              {"id": "STAT232", "name": "수리통계학"},
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "STAT201", "name": "통계수학"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 빅데이터 기반", "year": "3학년",
+            "courses": [
+              {"id": "STAT323", "name": "통계계산방법"},
+              {"id": "STAT342", "name": "회귀분석"},
+              {"id": "STAT343", "name": "범주형자료분석"},
+              {"id": "DATA304", "name": "빅데이터분석"},
+              {"id": "STAT302", "name": "시계열분석"},
+              {"id": "STAT346", "name": "통계적데이터과학I"},
+              {"id": "MATH344", "name": "확률과정개론"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: 통계 심화", "year": "4학년",
+            "courses": [
+              {"id": "STAT401", "name": "다변량통계분석"},
+              {"id": "STAT404", "name": "베이즈통계입문"},
+              {"id": "STAT409", "name": "통계적데이터과학II"},
+              {"id": "STAT424", "name": "통계적머신러닝"},
+              {"id": "STAT443", "name": "선형방법론"},
+              {"id": "DATA421", "name": "졸업프로젝트(캡스톤디자인)I"}
+            ]
+          }
+        ]
+      },
+      "실습/융합": {
+        "description": "데이터과학 실무 프로젝트 및 시각화 전문가를 목표로 하는 트랙",
+        "stages": [
+          {
+            "stage": 1, "label": "1단계: 학문의 기초", "year": "1학년",
+            "courses": [
+              {"id": "COSE101", "name": "컴퓨터프로그래밍I"},
+              {"id": "COSE102", "name": "컴퓨터프로그래밍II"},
+              {"id": "STAT170", "name": "기초통계학"},
+              {"id": "STAT204", "name": "통계계산프로그래밍"}
+            ]
+          },
+          {
+            "stage": 2, "label": "2단계: 데이터 기초", "year": "2학년",
+            "courses": [
+              {"id": "COSE213", "name": "자료구조"},
+              {"id": "COSE371", "name": "데이터베이스"},
+              {"id": "DATA301", "name": "데이터실험설계및분석"},
+              {"id": "DATA306", "name": "디자인사고"}
+            ]
+          },
+          {
+            "stage": 3, "label": "3단계: 시각화/분석", "year": "3학년",
+            "courses": [
+              {"id": "DATA304", "name": "빅데이터분석"},
+              {"id": "DATA401", "name": "데이터시각화"},
+              {"id": "DATA405", "name": "데이터프리젠테이션"},
+              {"id": "COSE436", "name": "인터렉티브시각화"},
+              {"id": "COSE457", "name": "실전SW프로젝트"}
+            ]
+          },
+          {
+            "stage": 4, "label": "4단계: 응용/캡스톤", "year": "4학년",
+            "courses": [
+              {"id": "DATA407", "name": "데이터과학응용I"},
+              {"id": "DATA409", "name": "데이터과학응용II"},
+              {"id": "DATA410", "name": "데이터과학응용III"},
+              {"id": "DATA412", "name": "데이터과학응용IV"},
+              {"id": "DATA421", "name": "졸업프로젝트(캡스톤디자인)I"},
+              {"id": "DATA422", "name": "졸업프로젝트(캡스톤디자인)II"}
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

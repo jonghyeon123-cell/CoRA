@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CORA</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <section id="login-screen" class="login-screen" aria-label="로그인 화면">
+      <article class="login-card">
+        <div class="login-logo" aria-label="CORA">
+          <span>C</span><span>O</span><span>R</span><span>A</span>
+        </div>
+        <p class="login-subtitle">CORA 공식 홈페이지 관리 체계</p>
+        <div class="auth-tabs" role="tablist" aria-label="계정 메뉴">
+          <button id="auth-login-tab" class="auth-tab is-active" type="button" data-auth-mode="login">로그인</button>
+          <button id="auth-register-tab" class="auth-tab" type="button" data-auth-mode="register">회원가입</button>
+        </div>
+        <p id="auth-feedback" class="auth-feedback" role="status" aria-live="polite"></p>
+        <form id="login-form" class="stack-form auth-form">
+          <label class="login-field">
+            <span class="sr-only">이메일</span>
+            <input id="login-email" name="email" type="email" placeholder="이메일" autocomplete="username" required />
+          </label>
+          <label class="login-field">
+            <span class="sr-only">비밀번호</span>
+            <input id="login-password" name="password" type="password" placeholder="******" autocomplete="current-password" required />
+          </label>
+          <label class="remember-field">
+            <input id="remember-login" name="remember" type="checkbox" checked />
+            <span>로그인 유지</span>
+          </label>
+          <button type="submit">로그인</button>
+          <p class="id-hint">아이디는 가입한 이메일입니다.</p>
+          <button type="button" id="forgot-pw-btn" class="forgot-link">비밀번호 찾기</button>
+        </form>
+        <form id="reset-form" class="stack-form auth-form hidden">
+          <p class="reset-info">이름과 가입한 이메일이 일치하면<br>비밀번호를 바로 재설정합니다.</p>
+          <label class="login-field">
+            <span class="sr-only">이름</span>
+            <input id="reset-name" name="name" type="text" placeholder="이름" autocomplete="name" required />
+          </label>
+          <label class="login-field">
+            <span class="sr-only">이메일</span>
+            <input id="reset-email" name="email" type="email" placeholder="이메일" autocomplete="email" required />
+          </label>
+          <label class="login-field">
+            <span class="sr-only">새 비밀번호</span>
+            <input id="reset-password" name="password" type="password" placeholder="새 비밀번호" minlength="6" required />
+          </label>
+          <label class="login-field">
+            <span class="sr-only">새 비밀번호 확인</span>
+            <input id="reset-password-confirm" name="passwordConfirm" type="password" placeholder="새 비밀번호 확인" minlength="6" required />
+          </label>
+          <button type="submit">비밀번호 재설정</button>
+          <button type="button" id="reset-back-btn" class="auth-back-btn">← 로그인으로 돌아가기</button>
+        </form>
+        <form id="register-form" class="stack-form auth-form hidden">
+          <label class="login-field">
+            <span class="sr-only">이름</span>
+            <input id="register-name" name="name" type="text" placeholder="이름" autocomplete="name" required />
+          </label>
+          <label class="login-field">
+            <span class="sr-only">학번</span>
+            <input id="register-student-id" name="studentId" type="text" placeholder="학번" required />
+          </label>
+          <label class="login-field">
+            <span class="sr-only">소속</span>
+            <input id="register-department" name="department" type="text" placeholder="소속" required />
+          </label>
+          <label class="login-field">
+            <span class="sr-only">이메일</span>
+            <input id="register-email" name="email" type="email" placeholder="이메일" autocomplete="email" required />
+          </label>
+          <label class="login-field">
+            <span class="sr-only">비밀번호</span>
+            <input id="register-password" name="password" type="password" placeholder="비밀번호" autocomplete="new-password" minlength="6" required />
+          </label>
+          <label class="login-field">
+            <span class="sr-only">비밀번호 확인</span>
+            <input id="register-password-confirm" name="passwordConfirm" type="password" placeholder="비밀번호 확인" autocomplete="new-password" minlength="6" required />
+          </label>
+          <button type="submit">가입하기</button>
+        </form>
+      </article>
+    </section>
+
+    <header class="site-header">
+      <button id="logo-chat-toggle" class="brand-button" type="button" aria-label="메인 홈으로 이동">
+        <span class="brand-mark" aria-hidden="true">CO</span>
+        <span>CORA</span>
+      </button>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="#home" data-view="home">홈</a>
+        <a href="#history" data-view="history">이수 현황</a>
+        <a href="#footprint" data-view="footprint">수강 발자취</a>
+        <a href="#career" data-view="career">진로 트랙</a>
+        <a href="#chat" data-view="chat" id="nav-chat">AI 챗봇</a>
+      </nav>
+      <div class="header-account">
+        <span id="user-chip" class="user-chip">로그인 전</span>
+        <button id="logout-button" class="ghost-button hidden" type="button">로그아웃</button>
+      </div>
+    </header>
+
+    <main id="page-main" class="portal-shell">
+      <section id="dashboard" class="home-dashboard">
+
+        <!-- ── 좌측 메인 ── -->
+        <div class="home-main">
+
+          <!-- Hero -->
+          <article class="hero-card">
+            <div class="hero-content">
+              <p class="eyebrow">CORA Portal</p>
+              <h1>Course Register<br>Assistant</h1>
+              <p class="hero-desc">AI 챗봇으로 과목을 추천받고,<br>수강 발자취 분석으로 더 나은 다음 학기를 설계하세요.</p>
+            </div>
+          </article>
+
+          <!-- 빠른 시작 -->
+          <section class="qs-section" aria-label="빠른 시작">
+            <p class="home-label">빠른 시작</p>
+            <div class="qs-grid">
+              <button class="qs-card" data-qs="history" type="button">
+                <span class="qs-icon" aria-hidden="true"></span>
+                <strong>이수 현황<br>입력하기</strong>
+                <span class="qs-arrow" aria-hidden="true">→</span>
+              </button>
+              <button class="qs-card" data-qs="footprint" type="button">
+                <span class="qs-icon" aria-hidden="true"></span>
+                <strong>수강 발자취<br>분석하기</strong>
+                <span class="qs-arrow" aria-hidden="true">→</span>
+              </button>
+              <button class="qs-card" data-qs="career" type="button">
+                <span class="qs-icon" aria-hidden="true"></span>
+                <strong>진로 트랙<br>설정하기</strong>
+                <span class="qs-arrow" aria-hidden="true">→</span>
+              </button>
+              <button class="qs-card" data-qs="chat" type="button">
+                <span class="qs-icon" aria-hidden="true"></span>
+                <strong>AI 챗봇<br>시작하기</strong>
+                <span class="qs-arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- 나의 학업 현황 -->
+          <section class="acad-section" aria-label="나의 학업 현황">
+            <p class="home-label">나의 학업 현황</p>
+            <div class="acad-grid">
+              <div class="acad-card">
+                <p class="acad-card-label">이수 과목 수</p>
+                <strong id="home-total-courses" class="acad-card-value">-</strong>
+                <p id="home-major-detail" class="acad-card-sub">이수 과목을 추가해보세요</p>
+              </div>
+              <div class="acad-card">
+                <p class="acad-card-label">트랙 진도율</p>
+                <strong id="home-track-pct" class="acad-card-value">-</strong>
+                <p id="track-preview" class="acad-card-sub">-</p>
+              </div>
+              <div class="acad-card acad-card-wide">
+                <p class="acad-card-label">주요 이수 영역</p>
+                <div id="home-area-bars" class="acad-area-bars">
+                  <p class="empty-state" style="font-size:0.8rem">학기를 추가하면 분석됩니다.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- ── 우측 사이드바 ── -->
+        <aside class="home-sidebar">
+          <div class="account-panel" aria-label="계정 정보">
+            <div class="panel-header">
+              <div><p class="panel-kicker">Account</p><h2>내 계정</h2></div>
+            </div>
+            <div id="account-summary" class="account-info-list">
+              <p class="acct-placeholder">로그인 후 계정 정보가 표시됩니다.</p>
+            </div>
+          </div>
+          <div class="activity-panel" id="results" aria-label="결과 출력 영역">
+            <div class="panel-header">
+              <div><p class="panel-kicker">Output</p><h2>최근 활동</h2></div>
+            </div>
+            <div id="result-summary" class="result-summary">
+              <p class="empty-state">아직 활동이 없습니다.</p>
+            </div>
+          </div>
+        </aside>
+
+      </section>
+
+      <section id="schedule" class="module-section hidden">
+        <div class="section-heading"><p class="eyebrow">History</p><h2>학기별 이수 현황</h2></div>
+        <!-- 기존 시간표 요소 보존 (숨김 — app.js null-guard 대상) -->
+        <div class="hidden" aria-hidden="true">
+          <form id="schedule-form">
+            <input name="courseTitle" /><input name="courseRoom" />
+            <select name="courseDay"><option value="월">월</option><option value="화">화</option><option value="수">수</option><option value="목">목</option><option value="금">금</option><option value="토">토</option><option value="일">일</option></select>
+            <select name="courseTime"><option value="09:00">09:00</option><option value="10:30">10:30</option><option value="12:00">12:00</option><option value="13:30">13:30</option><option value="15:00">15:00</option><option value="16:30">16:30</option></select>
+          </form>
+          <div id="timetable-grid"></div>
+        </div>
+        <!-- 수강 발자취 3-패널 UI -->
+        <div class="semester-history-shell">
+          <nav class="semester-nav" aria-label="학기 목록">
+            <button id="semester-add-btn" class="semester-add-btn" type="button">+ 학기 추가</button>
+            <div id="semester-list" class="semester-list" aria-live="polite">
+              <p class="empty-state" style="font-size:0.8rem">아직 추가된 학기가 없습니다.</p>
+            </div>
+          </nav>
+          <div id="semester-detail" class="semester-detail" aria-live="polite">
+            <p class="empty-state">왼쪽에서 학기를 선택하세요.</p>
+          </div>
+          <aside id="semester-analysis" class="semester-analysis">
+            <p class="empty-state">학기를 선택하면<br>분석이 표시됩니다.</p>
+          </aside>
+        </div>
+        <!-- 학기 추가 모달 -->
+        <div id="semester-add-panel" class="semester-add-panel hidden">
+          <form id="semester-add-form" class="semester-add-form">
+            <h3>새 학기 추가</h3>
+            <label>연도<input name="year" type="number" min="2000" max="2035" placeholder="2024" required /></label>
+            <label>학기
+              <select name="termType" required>
+                <option value="1">1학기</option>
+                <option value="summer">여름학기</option>
+                <option value="2" selected>2학기</option>
+                <option value="winter">겨울학기</option>
+              </select>
+            </label>
+            <label>제1전공<input name="primaryMajor" type="text" placeholder="컴퓨터학과" /></label>
+            <label>제2전공
+              <select name="secondaryMajor">
+                <option value="없음">없음</option>
+                <option value="이중전공">이중전공</option>
+                <option value="융합전공">융합전공</option>
+                <option value="학생설계전공">학생설계전공</option>
+                <option value="심화전공">심화전공</option>
+              </select>
+            </label>
+            <div class="semester-add-actions">
+              <button type="submit">추가</button>
+              <button type="button" id="semester-add-cancel">취소</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="gpa" class="module-section" hidden aria-hidden="true">
+        <div class="section-heading"><p class="eyebrow">Calculator</p><h2>학점계산기</h2></div>
+        <div class="module-grid gpa-layout">
+          <form id="gpa-form" class="tool-panel stack-form">
+            <label>과목명<input id="grade-course" name="gradeCourse" type="text" placeholder="운영체제" required /></label>
+            <label>이수 학점
+              <select id="grade-credit" name="gradeCredit" required>
+                <option value="1">1학점</option><option value="2">2학점</option>
+                <option value="3" selected>3학점</option><option value="4">4학점</option>
+              </select>
+            </label>
+            <label>성적
+              <select id="grade-score" name="gradeScore" required>
+                <option value="A+">A+</option><option value="A0">A0</option>
+                <option value="B+">B+</option><option value="B0">B0</option>
+                <option value="C+">C+</option><option value="C0">C0</option>
+                <option value="D+">D+</option><option value="D0">D0</option><option value="F">F</option>
+              </select>
+            </label>
+            <button type="submit">계산에 추가</button>
+          </form>
+          <div class="grade-panel">
+            <div class="gpa-total"><span>평균 평점</span><strong id="gpa-total">0.00</strong></div>
+            <div id="grade-list" class="grade-list" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="career" class="module-section hidden">
+        <div class="section-heading"><p class="eyebrow">Career Track</p><h2>진로 트랙</h2></div>
+        <div class="module-grid career-layout">
+          <form id="career-form" class="tool-panel stack-form">
+            <label>학과
+              <select id="career-department" name="careerDepartment" required>
+                <option value="컴퓨터학과">컴퓨터학과</option>
+              </select>
+            </label>
+            <label>학년
+              <select id="career-grade" name="careerGrade" required>
+                <option value="1">1학년</option><option value="2" selected>2학년</option>
+                <option value="3">3학년</option><option value="4">4학년</option>
+              </select>
+            </label>
+            <label>희망 진로<select id="career-track" name="careerTrack" required></select></label>
+            <fieldset class="course-checklist">
+              <legend>이수한 과목</legend>
+              <div id="career-course-list" class="course-check-grid" aria-label="이수 과목 목록"></div>
+            </fieldset>
+            <button type="submit">로드맵 보기</button>
+          </form>
+          <div class="career-panel">
+            <div id="career-result" class="career-result" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="course-footprint" class="module-section hidden">
+        <div class="section-heading">
+          <p class="eyebrow">Course Footprint</p>
+          <h2>수강 발자취</h2>
+        </div>
+        <p class="footprint-subtitle">실제 선배들의 수강 패턴을 분석해 다음 학기 과목을 추천합니다.</p>
+        <div class="module-grid footprint-layout">
+          <form id="footprint-form" class="tool-panel stack-form">
+            <label>학과
+              <select id="footprint-department" name="footprintDepartment" required>
+                <option value="인공지능학과">인공지능학과</option>
+                <option value="컴퓨터학과">컴퓨터학과</option>
+                <option value="데이터과학과">데이터과학과</option>
+              </select>
+            </label>
+            <label>희망 트랙
+              <select id="footprint-track" name="footprintTrack" required>
+                <option value="AI/인공지능">AI/인공지능</option>
+                <option value="Blockchain/보안">Blockchain/보안</option>
+                <option value="Cloud/IoT/시스템">Cloud/IoT/시스템</option>
+                <option value="빅데이터">빅데이터</option>
+              </select>
+            </label>
+            <label>기준 과목 코드 (Anchor Course)
+              <input id="footprint-courses" name="footprintCourses" type="text" placeholder="예: COSE213 (한 과목만 입력)" autocomplete="off" />
+              <span class="footprint-input-hint">한 번에 하나의 학수번호만 분석 가능합니다.</span>
+              <span id="footprint-course-error" class="footprint-course-error" role="alert" aria-live="polite"></span>
+            </label>
+            <button type="submit">수강 발자취 분석</button>
+          </form>
+          <div class="career-panel footprint-result-panel">
+            <div id="footprint-result" class="footprint-result" aria-live="polite">
+              <p class="empty-state">학과, 트랙, 이수 과목을 입력하고 분석 버튼을 누르세요.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <main id="page-chat" class="portal-shell hidden">
+      <section class="module-section">
+        <div class="section-heading">
+          <p class="eyebrow">AI Assistant</p>
+          <h2>CORA 챗봇</h2>
+        </div>
+
+        <div class="module-grid chat-page-layout">
+          <div class="tool-panel chat-panel-full">
+            <div class="chat-drawer-header">
+              <div><p class="panel-kicker">Chat</p><h3>무엇이든 물어보세요</h3></div>
+              <span id="connection-status" class="status-badge">Mock API</span>
+            </div>
+            
+            <div id="message-list" class="message-list" aria-live="polite">
+              <div class="message assistant">
+                <span class="message-meta">CORA</span>
+                <p>안녕하세요! 고려대학교 수강신청 도우미 CORA입니다.<br>시간표, 학점 계산, 진로 트랙 관련해서 궁금한 점을 말씀해 주세요.</p>
+              </div>
+            </div>
+            
+            <form id="chat-form" class="chat-form">
+              <label class="sr-only" for="chat-input">메시지 입력</label>
+              <textarea id="chat-input" name="message" rows="1" placeholder="CoRA에게 물어보세요" required></textarea>
+              <button type="submit">전송</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>CORA</span>
+      <span>2026 CORA Portal Prototype</span>
+    </footer>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

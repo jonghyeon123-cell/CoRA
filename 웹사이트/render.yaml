@@ -1,0 +1,24 @@
+# ⚠️ 이 파일은 웹사이트/ 서브폴더용 참조 파일입니다.
+#
+# Render 실제 배포는 저장소 루트(CoRA/)의 render.yaml을 사용합니다:
+#   - runtime: docker
+#   - Node(3000) + FastAPI(8000) 단일 컨테이너
+#   - ANTHROPIC_API_KEY, VOYAGE_API_KEY 대시보드에서 수동 입력 필요
+#
+# 이 파일을 Render에 직접 연결하면 Python AI 엔진 없이 배포됩니다.
+# (chat 기능 동작 불가)
+#
+# Node-only 모드(chat mock fallback)가 필요한 경우에만 사용:
+services:
+  - type: web
+    name: cora-node-only
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CORA_API_URL
+        value: http://127.0.0.1:8000

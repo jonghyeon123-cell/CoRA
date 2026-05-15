@@ -1,0 +1,62 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+
+# Vector DB (chroma.sqlite3 = 103MB → GitHub 100MB 초과)
+cora_vectordb/
+
+# 원본 대용량 데이터 (PDF/HWP, 522MB)
+cora_data/files/
+cora_data/syllabi/
+cora_data/syllabi_progress.json
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+*.log
+
+# 환경변수
+.env
+.env.*
+!.env.example
+
+# 사용자 데이터
+.data/
+웹사이트/.data/
+
+# OS / WSL 아티팩트 (모든 Identifier 변형)
+.DS_Store
+Thumbs.db
+*.Zone.Identifier
+*:Zone.Identifier
+*.Identifier
+
+# 빌드 산출물
+dist/
+build/
+coverage/
+
+# 개발 전용 파일 (Public repo 제외)
+이상한거/
+이것저것.txt
+eval_debug.txt
+api.txt
+코드리뷰\ 프롬프트.txt
+
+# 개인 데이터 / 스크린샷
+*.xlsx
+학기별\ 전공\ 이수\ 히스토리.png
+cora_홈화면.png.png
+
+# 대회 기획서 (선택 — 공개 원하면 이 줄 삭제)
+# 2026_NEXT_Contest_기획서.docx
+
+# 에디터
+.vscode/
+.idea/
