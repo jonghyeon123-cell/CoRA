@@ -7,6 +7,12 @@
 
 FROM node:22-slim
 
+ARG ANTHROPIC_API_KEY
+ARG VOYAGE_API_KEY
+
+ENV ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY
+ENV VOYAGE_API_KEY=$VOYAGE_API_KEY
+
 # Python 환경 설치
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 python3-pip python3-venv curl \
