@@ -386,8 +386,17 @@ careerResult.addEventListener("click", (event) => {
   const analysis = getCareerAnalysis(selection);
   const missingText = formatCourseList(analysis.missingRequired, 8);
   const nextText = formatCourseList(analysis.nextCourses, 6);
+  const roadmapText = formatTrackRoadmapForPrompt(analysis);
   navigateTo("chat");
-  chatInput.value = `${analysis.department.name} ${selection.grade}학년 ${analysis.track.name} 트랙으로 가고 싶어.\n아직 안 들은 핵심 과목은 ${missingText}이고,\n다음 추천 과목은 ${nextText}야.\n선수과목과 난이도를 고려해서 어떤 순서로 들으면 좋을지 알려줘.`;
+  chatInput.value = `${analysis.department.name} ${selection.grade}학년 ${analysis.track.name} 트랙으로 가고 싶어.
+선택한 트랙 로드맵:
+${roadmapText}
+
+이미 들은 과목: ${formatCourseList(analysis.completedRequired, 10)}
+아직 안 들은 핵심 과목: ${missingText}
+다음 추천 과목: ${nextText}
+
+선수과목과 난이도를 고려해서 어떤 순서로 들으면 좋을지 알려줘.`;
 });
 
 // 채팅 전송 이벤트
@@ -636,6 +645,7 @@ function renderCareerCourseList(completedCourses = []) {
   const department = careerRoadmap[dept];
   if (!department) return;
   const seen = new Set();
+  const completedSet = new Set(completedCourses.map(normalizeCourseId));
   const allCourses = Object.values(department.tracks)
     .flatMap(track => track.stages.flatMap(stage => stage.courses))
     .filter(c => { if (seen.has(c.id)) return false; seen.add(c.id); return true; });
@@ -647,7 +657,7 @@ function renderCareerCourseList(completedCourses = []) {
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.value = course.id;
-      checkbox.checked = completedCourses.includes(course.id);
+      checkbox.checked = completedSet.has(normalizeCourseId(course.id));
       const text = document.createElement("span");
       text.textContent = `${course.name} (${course.id})`;
       label.append(checkbox, text);
@@ -786,13 +796,14 @@ function getCareerAnalysis(selection) {
   const department = careerRoadmap[dept] || careerRoadmap[Object.keys(careerRoadmap)[0]];
   const trackKey = selection.track;
   const track = department?.tracks[trackKey] || Object.values(department?.tracks || {})[0];
-  const completedIds = selection.completedCourses || [];
+  const completedIds = (selection.completedCourses || []).map(normalizeCourseId).filter(Boolean);
+  const completedSet = new Set(completedIds);
 
   const allCourses = track?.stages?.flatMap(stage => stage.courses) || [];
-  const completedRequired = allCourses.filter(c => completedIds.includes(c.id));
-  const missingRequired = allCourses.filter(c => !completedIds.includes(c.id));
+  const completedRequired = allCourses.filter(c => completedSet.has(normalizeCourseId(c.id)));
+  const missingRequired = allCourses.filter(c => !completedSet.has(normalizeCourseId(c.id)));
   const currentStage = track?.stages?.find(s => s.year?.includes(String(selection.grade))) || track?.stages?.[0];
-  const nextCourses = (currentStage?.courses || []).filter(c => !completedIds.includes(c.id)).slice(0, 6);
+  const nextCourses = (currentStage?.courses || []).filter(c => !completedSet.has(normalizeCourseId(c.id))).slice(0, 6);
   const completionRate = allCourses.length ? Math.round((completedRequired.length / allCourses.length) * 100) : 0;
 
   const byGrade = {};
@@ -812,7 +823,7 @@ function getCareerAnalysis(selection) {
 function getNextRoadmapCourses(selection) {
   const analysis = getCareerAnalysis(selection);
   const grade = Number(selection.grade);
-  const completedIds = analysis.completedCourses || [];
+  const completedIds = new Set((analysis.completedCourses || []).map(normalizeCourseId));
 
   // 1순위: 현재 학년 stage에서 미이수
   let candidates = analysis.nextCourses.slice();
@@ -820,7 +831,7 @@ function getNextRoadmapCourses(selection) {
   // 2순위: 다음 학년 stage
   if (candidates.length === 0) {
     const nextGradeCourses = analysis.track.byGrade[String(grade + 1)] || [];
-    candidates = nextGradeCourses.filter(c => !completedIds.includes(c.id));
+    candidates = nextGradeCourses.filter(c => !completedIds.has(normalizeCourseId(c.id)));
   }
 
   // 3순위: 전체 미이수 필수 과목
@@ -864,7 +875,7 @@ function getCareerSelection() {
     department: careerDepartment.value,
     grade: Number(careerGrade.value),
     track: careerTrack.value,
-    completedCourses: [...careerCourseList.querySelectorAll("input:checked")].map((input) => input.value)
+    completedCourses: [...careerCourseList.querySelectorAll("input:checked")].map((input) => normalizeCourseId(input.value))
   };
 }
 
@@ -979,6 +990,32 @@ function formatCourseList(courses, max = 8) {
     })
     .filter(Boolean)
     .join(", ") || "없음";
+}
+
+function formatTrackRoadmapForPrompt(analysis) {
+  const byGrade = analysis.track.byGrade || {};
+  const rows = Object.entries(byGrade).map(([grade, courses]) => {
+    const courseText = formatCourseList(courses, 12);
+    return `${grade}학년: ${courseText}`;
+  });
+
+  return rows.join("\n") || "로드맵 정보 없음";
+}
+
+function normalizeCourseId(value) {
+  return String(value || "")
+    .trim()
+    .toUpperCase()
+    .replace(/[-_@].*$/, "")
+    .replace(/\s+/g, "");
+}
+
+function getCompletedCourseIdsForProgress() {
+  const selection = loadCareerSelection();
+  const historyIds = semesterHistory.flatMap(s => s.courses).map(c => c.courseId);
+  const checkedIds = selection.completedCourses || [];
+
+  return [...new Set([...historyIds, ...checkedIds].map(normalizeCourseId).filter(Boolean))];
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1256,7 +1293,7 @@ function renderSemesterAnalysis() {
   if (!sem) return;
 
   const allCourses = semesterHistory.flatMap(s => s.courses);
-  const uniqueCourseIds = [...new Set(allCourses.map(c => c.courseId))];
+  const uniqueCourseIds = getCompletedCourseIdsForProgress();
   const majorCount = sem.courses.filter(c => c.majorType === "전공").length;
   const secondMajorCount = sem.courses.filter(c => c.majorType === "제2전공").length;
   const liberalCount = sem.courses.filter(c => c.majorType === "교양").length;
@@ -1521,6 +1558,8 @@ function handleRoadmapView() {
   const selection = getCareerSelection();
   const analysis = renderCareerResult(selection);
   saveCareerSelection(selection);
+  renderHomeDashboard();
+  renderSemesterAnalysis();
 
   // 결과 패널 플래시 + 스크롤
   careerResult.classList.remove("career-result-flash");
@@ -1613,7 +1652,7 @@ function renderHomeDashboard() {
     try {
       const selection = loadCareerSelection();
       if (selection.track && Object.keys(careerRoadmap).length > 0) {
-        const uniqueIds = [...new Set(allCourses.map(c => c.courseId))];
+        const uniqueIds = getCompletedCourseIdsForProgress();
         const analysis = getCareerAnalysis({ ...selection, completedCourses: uniqueIds });
         trackPctEl.textContent = `${analysis.completionRate}%`;
         if (trackPreviewEl) trackPreviewEl.textContent = selection.track;
@@ -1661,4 +1700,3 @@ document.querySelectorAll("[data-qs]").forEach(btn => {
     else if (view === "chat") setTimeout(() => document.querySelector("#chat-input")?.focus(), 120);
   });
 });
-
