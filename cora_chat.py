@@ -98,6 +98,8 @@ SYSTEM_PROMPT = """당신은 고려대학교 수강신청 도우미 CoRA(Course 
 - 검색결과에 없는 과목명, 교수명, 학수번호는 절대 언급하지 마세요.
 - 확실하지 않은 정보는 추측하지 말고 반드시 "해당 정보는 찾지 못했습니다"라고 답하세요.
 - 사용자가 특정 과목 이수 후 다음 과목을 물어보면, 검색결과에서 연관성 있는 과목을 추천하고 그 이유를 설명하세요.
+- 사용자가 "추천해줘", "관련 과목", "듣기 좋은 과목"처럼 물으면 검색된 과목 중 적절한 과목을 추천하세요.
+- 정확한 과목명이 아니어도 주제 키워드와 관련된 과목을 찾아 추천하세요.
 """
 
 
@@ -318,6 +320,69 @@ def rewrite_query(query):
         }]
     )
     return response.content[0].text.strip()    
+  STOPWORDS = {
+    "관련", "과목", "추천", "추천해줘", "알려줘", "수업",
+    "강의", "듣고", "싶어", "다음", "학기", "좋은"
+}
+
+QUERY_ALIASES = {
+    "미적분": ["미적분", "미분적분", "Calculus", "calculus", "수학"],
+    "인공지능": ["AI", "인공지능", "기계학습", "딥러닝", "머신러닝"],
+    "보안": ["보안", "정보보호", "암호", "시스템보안"],
+    "백엔드": ["백엔드", "시스템", "운영체제", "데이터베이스", "네트워크"],
+    "데이터": ["데이터", "빅데이터", "데이터베이스", "데이터마이닝"]
+}
+
+def extract_subject_terms(query):
+    cleaned = re.sub(r"[^가-힣a-zA-Z0-9+#]", " ", query)
+    terms = []
+
+    for token in cleaned.split():
+        token = token.strip()
+        if len(token) < 2:
+            continue
+        if token in STOPWORDS:
+            continue
+
+        terms.append(token)
+        terms.extend(QUERY_ALIASES.get(token, []))
+
+    return list(dict.fromkeys(terms))
+
+
+def partial_course_search(query, limit=20):
+    terms = extract_subject_terms(query)
+    if not terms:
+        return []
+
+    results = []
+
+    for course in ALL_COURSES:
+        key = f"{course.get('cour_cd')}@{course.get('cour_cls')}"
+        summary = SUMMARIES.get(key, {})
+
+        searchable_text = " ".join([
+            course.get("cour_nm", ""),
+            course.get("department", ""),
+            course.get("isu_nm", ""),
+            course.get("prof_nm", ""),
+            json.dumps(summary, ensure_ascii=False)
+        ]).lower()
+
+        score = 0
+        for term in terms:
+            term_lower = term.lower()
+            if term_lower in course.get("cour_nm", "").lower():
+                score += 4
+            elif term_lower in searchable_text:
+                score += 1
+
+        if score > 0:
+            results.append((score, course))
+
+    results.sort(key=lambda item: item[0], reverse=True)
+    return [course for _, course in results[:limit]]
+
 
 
 def normalize_course_code(code: str) -> str:
@@ -429,7 +494,8 @@ def hybrid_search(query):
 
     context = ""
     show_weekly = any(kw in query for kw in ["주차", "커리큘럼", "강의계획", "수업계획", "weekly","주차별","계획","시간표","어떤 내용","내용","수업 내용","강의 계획","수업 계획","스케쥴","schedule","뭘 배워","무엇을 배워","무엇을 배워?","뭘 배워?","어떻게 진행","어떤식으로 진행 돼?","학습계획","학습 계획","주차별 학습계획"])
-
+  
+  
     # 키워드 검색 (한 번만 호출)
     kw_results = keyword_search(keywords) if has_keywords else []
     #print(f"DEBUG kw_results: {len(kw_results)}개")
@@ -440,6 +506,15 @@ def hybrid_search(query):
         for i, course in enumerate(kw_results):
             context += f"\n--- 과목 {i+1} ---\n"
             context += format_course(course, show_weekly = show_weekly)
+          
+    partial_results = partial_course_search(query)
+
+    if partial_results:
+      context += f"\n[부분 키워드 검색 결과: {len(partial_results)}개]\n"
+      for i, course in enumerate(partial_results[:MAX_COURSES]):
+          context += f"\n— 과목 {i+1} —\n"
+          context += format_course(course, show_weekly=show_weekly)
+
 
     # 키워드 없거나 결과 부족하면 벡터 검색 보완
     # 단, 학수번호나 과목명이 명시된 경우엔 벡터 검색 안 함
