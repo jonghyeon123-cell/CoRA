@@ -14,7 +14,7 @@ const host = process.env.HOST || (process.env.PORT ? "0.0.0.0" : "127.0.0.1");
 const coraApiUrl = process.env.CORA_API_URL || "http://127.0.0.1:8000";
 const accountsFilePath = join(projectRoot, ".data", "accounts.json");
 const reviewsFilePath = join(projectRoot, ".data", "reviews.json");
-const courseHistoryFilePath = join(projectRoot, ".data", "course_history.json");
+const courseHistoryFilePath = join(projectRoot, "course_history.json");
 const roadmapFilePath = join(projectRoot, "roadmap.json");
 const scryptAsync = promisify(scrypt);
 
@@ -465,10 +465,38 @@ function sendJson(response, statusCode, payload) {
 async function loadCourseHistory() {
   try {
     const content = await readFile(courseHistoryFilePath, "utf-8");
-    return JSON.parse(content);
+    const parsed = JSON.parse(content);
+    return Array.isArray(parsed)
+      ? parsed.map(normalizeHistoryStudent).filter(Boolean)
+      : [];
   } catch {
     return [];
   }
+}
+
+function normalizeCourseId(courseId) {
+  return String(courseId || "").trim().toUpperCase();
+}
+
+function normalizeText(value) {
+  return String(value || "").trim();
+}
+
+function normalizeHistoryStudent(student) {
+  if (!student || !Array.isArray(student.semesterHistory)) return null;
+  const semesterHistory = student.semesterHistory
+    .map(semester => Array.isArray(semester)
+      ? [...new Set(semester.map(normalizeCourseId).filter(Boolean))]
+      : [])
+    .filter(semester => semester.length > 0);
+
+  return {
+    ...student,
+    department: normalizeText(student.department),
+    track: normalizeText(student.track || "전체"),
+    semesterHistory,
+    courseNames: student.courseNames || {}
+  };
 }
 
 async function loadRoadmap() {
@@ -481,8 +509,8 @@ async function loadRoadmap() {
 }
 
 function calculateJaccardSimilarity(setA, setB) {
-  const a = new Set(setA);
-  const b = new Set(setB);
+  const a = new Set(setA.map(normalizeCourseId).filter(Boolean));
+  const b = new Set(setB.map(normalizeCourseId).filter(Boolean));
   const intersection = [...a].filter(x => b.has(x)).length;
   const union = new Set([...a, ...b]).size;
   if (union === 0) return 0;
@@ -490,7 +518,7 @@ function calculateJaccardSimilarity(setA, setB) {
 }
 
 function analyzeCourseTransitions(matchedStudents, completedCourses) {
-  const completed = new Set(completedCourses);
+  const completed = new Set(completedCourses.map(normalizeCourseId).filter(Boolean));
   const courseFreq = new Map();
 
   for (const student of matchedStudents) {
@@ -518,13 +546,19 @@ function analyzeCourseTransitions(matchedStudents, completedCourses) {
   return courseFreq;
 }
 
-function buildCourseNameMap(roadmap) {
+function buildCourseNameMap(roadmap, history = []) {
   const map = {};
+  for (const student of history) {
+    for (const [courseId, courseName] of Object.entries(student.courseNames || {})) {
+      const normalizedId = normalizeCourseId(courseId);
+      if (normalizedId && courseName) map[normalizedId] = courseName;
+    }
+  }
   for (const dept of Object.values(roadmap)) {
     for (const trackData of Object.values(dept.tracks || {})) {
       for (const stage of trackData.stages || []) {
         for (const course of stage.courses || []) {
-          map[course.id] = course.name;
+          map[normalizeCourseId(course.id)] = course.name;
         }
       }
     }
@@ -532,11 +566,11 @@ function buildCourseNameMap(roadmap) {
   return map;
 }
 
-function buildReason(courseId, completedCourses, matchedStudents) {
+function buildReason(courseId, completedCourses, matchedStudents, frequency) {
   let bestPrior = null;
   let bestCount = 0;
 
-  for (const prior of completedCourses) {
+  for (const prior of completedCourses.map(normalizeCourseId).filter(Boolean)) {
     let count = 0;
     for (const student of matchedStudents) {
       const { semesterHistory } = student;
@@ -551,18 +585,20 @@ function buildReason(courseId, completedCourses, matchedStudents) {
     if (count > bestCount) { bestCount = count; bestPrior = prior; }
   }
 
-  if (bestPrior && bestCount > 0) return `${bestPrior} 이수 후 ${bestCount}명이 다음 학기에 선택`;
+  if (bestPrior && bestCount > 0) {
+    return `${bestPrior} 이수 후 유사 학생 ${matchedStudents.length}명 중 ${frequency}명이 선택`;
+  }
   return "유사 수강 패턴 학생들이 자주 선택한 과목";
 }
 
 function getRoadmapFallback(track, completedCourses, roadmap) {
-  const completed = new Set(completedCourses);
+  const completed = new Set(completedCourses.map(normalizeCourseId).filter(Boolean));
   for (const dept of Object.values(roadmap)) {
     const trackData = dept.tracks?.[track];
     if (!trackData) continue;
     return (trackData.stages || [])
       .flatMap(s => s.courses || [])
-      .filter(c => !completed.has(c.id))
+      .filter(c => !completed.has(normalizeCourseId(c.id)))
       .slice(0, 6)
       .map(c => ({
         courseId: c.id,
@@ -576,22 +612,27 @@ function getRoadmapFallback(track, completedCourses, roadmap) {
 }
 
 function getFootprintRecommendations(department, track, completedCourses, history, roadmap) {
-  // Primary: 같은 학과 + 같은 트랙
-  let matched = history.filter(s => s.department === department && s.track === track);
+  const normalizedDepartment = normalizeText(department);
+  const normalizedTrack = normalizeText(track);
+  const normalizedCompleted = completedCourses.map(normalizeCourseId).filter(Boolean);
 
-  // 3명 미만이면 같은 학과 타 트랙 보조 확장
+  // Primary: 같은 학과 + 같은 트랙
+  let matched = history.filter(s => s.department === normalizedDepartment && s.track === normalizedTrack);
+
+  // 엑셀 데이터의 제2전공 값(예: 심화전공)과 화면의 희망 트랙 값(AI/인공지능 등)이
+  // 다를 수 있으므로, 표본이 적으면 같은 학과 전체로 보조 확장한다.
   if (matched.length < 3) {
-    const extra = history.filter(s => s.department === department && s.track !== track);
+    const extra = history.filter(s => s.department === normalizedDepartment && s.track !== normalizedTrack);
     matched = [...matched, ...extra];
   }
 
   const matchedGroupSize = matched.length;
 
   // completedCourses 없거나 매칭된 학생 없으면 roadmap fallback
-  if (completedCourses.length === 0 || matched.length === 0) {
+  if (normalizedCompleted.length === 0 || matched.length === 0) {
     return {
       matchedGroupSize,
-      recommendations: getRoadmapFallback(track, completedCourses, roadmap),
+      recommendations: getRoadmapFallback(normalizedTrack, normalizedCompleted, roadmap),
       source: "roadmap-fallback"
     };
   }
@@ -600,7 +641,7 @@ function getFootprintRecommendations(department, track, completedCourses, histor
   const withSimilarity = matched
     .map(student => {
       const all = student.semesterHistory.flat();
-      const sim = calculateJaccardSimilarity(completedCourses, all);
+      const sim = calculateJaccardSimilarity(normalizedCompleted, all);
       return { student, sim };
     })
     .filter(({ sim }) => sim > 0)
@@ -611,14 +652,14 @@ function getFootprintRecommendations(department, track, completedCourses, histor
   if (topStudents.length === 0) {
     return {
       matchedGroupSize,
-      recommendations: getRoadmapFallback(track, completedCourses, roadmap),
+      recommendations: getRoadmapFallback(normalizedTrack, normalizedCompleted, roadmap),
       source: "roadmap-fallback"
     };
   }
 
   // 다음 학기 전환 빈도 분석
-  const courseFreq = analyzeCourseTransitions(topStudents, completedCourses);
-  const courseNameMap = buildCourseNameMap(roadmap);
+  const courseFreq = analyzeCourseTransitions(topStudents, normalizedCompleted);
+  const courseNameMap = buildCourseNameMap(roadmap, history);
 
   const recommendations = [...courseFreq.entries()]
     .sort((a, b) => b[1] - a[1])
@@ -628,13 +669,13 @@ function getFootprintRecommendations(department, track, completedCourses, histor
       courseName: courseNameMap[courseId] || courseId,
       frequency: freq,
       percentage: Math.round((freq / topStudents.length) * 100),
-      reason: buildReason(courseId, completedCourses, topStudents)
+      reason: buildReason(courseId, normalizedCompleted, topStudents, freq)
     }));
 
   if (recommendations.length === 0) {
     return {
       matchedGroupSize: topStudents.length,
-      recommendations: getRoadmapFallback(track, completedCourses, roadmap),
+      recommendations: getRoadmapFallback(normalizedTrack, normalizedCompleted, roadmap),
       source: "roadmap-fallback"
     };
   }
@@ -653,7 +694,7 @@ async function handleCourseFootprintRequest(request, response) {
     const track = url.searchParams.get("track") || "";
     const completedParam = url.searchParams.get("completedCourses") || "";
     const completedCourses = completedParam
-      ? completedParam.split(",").map(s => s.trim()).filter(Boolean)
+      ? completedParam.split(",").map(normalizeCourseId).filter(Boolean)
       : [];
 
     const history = courseHistoryCache || await loadCourseHistory();
@@ -665,4 +706,3 @@ async function handleCourseFootprintRequest(request, response) {
     sendJson(response, 500, { error: error.message });
   }
 }
-
