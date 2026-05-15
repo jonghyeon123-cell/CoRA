@@ -966,7 +966,7 @@ body.is-authenticated .login-screen { display: none; }
 .chat-panel-full .message p {
   margin: 0;
   font-size: 0.9rem;
-  line-height: 1.65;
+  line-height: 1.42;
   word-break: break-word;
 }
 
@@ -976,7 +976,7 @@ body.is-authenticated .login-screen { display: none; }
   font-size: 0.97rem;
   font-weight: 800;
   color: var(--accent);
-  margin: 0.55em 0 0.12em;
+  margin: 0.42em 0 0.08em;
   letter-spacing: -0.01em;
 }
 .msg-h3 {
@@ -984,7 +984,7 @@ body.is-authenticated .login-screen { display: none; }
   font-size: 0.91rem;
   font-weight: 700;
   color: var(--ink);
-  margin: 0.4em 0 0.08em;
+  margin: 0.32em 0 0.06em;
 }
 .message.user .msg-h1,
 .message.user .msg-h2,
@@ -994,7 +994,7 @@ body.is-authenticated .login-screen { display: none; }
   display: block;
   height: 1px;
   background: var(--line);
-  margin: 0.55em 0;
+  margin: 0.38em 0;
   border: none;
 }
 .message.user .msg-hr { background: rgba(255,255,255,0.25); }
@@ -1003,7 +1003,7 @@ body.is-authenticated .login-screen { display: none; }
   display: block;
   padding-left: 1.1em;
   position: relative;
-  margin-top: 0.1em;
+  margin-top: 0.02em;
 }
 .msg-li::before {
   content: '•';
