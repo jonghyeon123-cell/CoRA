@@ -1,7 +1,15 @@
 // 재사용 가능한 렌더링 함수입니다. UI 컴포넌트 교체가 필요하면 이 파일 중심으로 수정합니다.
 
 function formatMessageContent(raw) {
-  return raw
+  const compactText = String(raw || "")
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .join("\n")
+    .replace(/\n{2,}/g, "\n")
+    .trim();
+
+  return compactText
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
