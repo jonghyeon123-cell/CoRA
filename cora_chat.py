@@ -222,19 +222,17 @@ def keyword_search(keywords):
 # ④ 벡터 검색
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def vector_search(query, n_results=5):
-    """벡터 DB에서 의미 기반 검색"""
-    vo = voyageai.Client(api_key=VOYAGE_API_KEY)
-    client = chromadb.PersistentClient(path=VECTOR_DB_DIR)
-    collection = client.get_collection("courses")
-
-    result = vo.embed([query], model="voyage-3", input_type="query")
-    query_embedding = result.embeddings[0]
-
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=n_results
-    )
-    return results
+    """벡터 DB에서 의미 기반 검색 (vectordb 없으면 빈 결과 반환)"""
+    try:
+        vo = voyageai.Client(api_key=VOYAGE_API_KEY)
+        client = chromadb.PersistentClient(path=VECTOR_DB_DIR)
+        collection = client.get_collection("courses")
+        result = vo.embed([query], model="voyage-3", input_type="query")
+        query_embedding = result.embeddings[0]
+        return collection.query(query_embeddings=[query_embedding], n_results=n_results)
+    except Exception as e:
+        print(f"[WARN] 벡터 검색 불가 (vectordb 초기화 중이거나 누락): {e}")
+        return {"documents": [[]], "metadatas": [[]]}
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

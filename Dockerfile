@@ -9,7 +9,7 @@ FROM node:22-slim
 
 # Python 환경 설치
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 python3-pip python3-venv \
+    python3 python3-pip python3-venv curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Python 가상환경 + 의존성

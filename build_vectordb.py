@@ -204,14 +204,15 @@ def test_search(query="인공지능 관련 과목 추천해줘"):
 
 
 if __name__ == "__main__":
+    import sys
     print("=" * 50)
     print("  CoRA 벡터 DB 구축")
     print("=" * 50)
 
-    # 벡터 DB 구축
     build_vectordb()
 
-    # 검색 테스트
-    print("\n검색 테스트 실행 중...")
-    test_search("인공지능 관련 과목 추천해줘")
-    test_search("프로그래밍 기초 배우고 싶어")
+    # 검색 테스트는 'test' 인자 명시 시에만 실행 (배포 시 API 비용 절약)
+    if len(sys.argv) > 1 and sys.argv[1] == "test":
+        print("\n검색 테스트 실행 중...")
+        test_search("인공지능 관련 과목 추천해줘")
+        test_search("프로그래밍 기초 배우고 싶어")
